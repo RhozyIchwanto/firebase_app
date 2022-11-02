@@ -31,4 +31,26 @@ class Users with ChangeNotifier {
 
     return await users.get();
   }
+
+  Stream<QuerySnapshot<Object?>> streamUsers() {
+    CollectionReference users = db.collection("users");
+
+    return users.snapshots();
+  }
+
+  Future<DocumentSnapshot<Object?>> getUsersByidDoc(String id) {
+    DocumentReference docRef = db.collection("users").doc(id);
+
+    return docRef.get();
+  }
+
+  void updateUser(String id) {
+    DocumentReference docRef = db.collection("users").doc(id);
+
+    docRef.update({
+      'firstname': firshnameC.text,
+      'lastname': lastnamenameC.text,
+      'age': age.text,
+    });
+  }
 }
