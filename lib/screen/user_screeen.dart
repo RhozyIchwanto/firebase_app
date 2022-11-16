@@ -66,6 +66,12 @@ class UsersScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final user = data[index].data() as Map<String, dynamic>;
                 return ListTile(
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () {
+                      users.deleteUser(data[index].id);
+                    },
+                  ),
                   onTap: () {
                     Navigator.push(
                       context,

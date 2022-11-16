@@ -53,4 +53,10 @@ class Users with ChangeNotifier {
       'age': age.text,
     });
   }
+
+  void deleteUser(String id) {
+    DocumentReference docRef = db.collection("users").doc(id);
+
+    docRef.delete();
+  }
 }
