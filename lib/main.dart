@@ -1,5 +1,9 @@
+import 'dart:html';
+
 import 'package:firebase_app/firebase_options.dart';
+import 'package:firebase_app/provider/storage.dart';
 import 'package:firebase_app/provider/users.dart';
+import 'package:firebase_app/screen/upload_screen.dart';
 import 'package:firebase_app/screen/user_screeen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +24,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ChangeNotifierProvider(
-        create: (context) => Users(),
-        child: UsersScreen(),
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => Users(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => Storage(),
+          ),
+        ],
+        child: UploadScreen(),
       ),
     );
   }
