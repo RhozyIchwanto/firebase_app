@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_app/provider/auth.dart';
 import 'package:firebase_app/provider/users.dart';
 import 'package:firebase_app/screen/add_users.dart';
 import 'package:firebase_app/screen/edit_user.dart';
@@ -13,6 +14,7 @@ class UsersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Users users = Provider.of<Users>(context);
+    Auth auth = Provider.of<Auth>(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -30,6 +32,14 @@ class UsersScreen extends StatelessWidget {
       ),
       appBar: AppBar(
         title: Text("Users"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              auth.logout();
+            },
+            icon: Icon(Icons.logout),
+          ),
+        ],
       ),
       //get data Sekali(Future) dari Fire base
       // body: FutureBuilder<QuerySnapshot<Object?>>(
